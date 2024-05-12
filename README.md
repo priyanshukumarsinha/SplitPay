@@ -25,8 +25,8 @@ Managing shared expenses among individuals and groups is a tedious and time-cons
     - Date Added to IEEE Xplore: 21 October 2022
     - Publisher: IEEE
     - Authors
-        - Muchsin Hisyam (Computer Science Department, Faculty of Computing and Media, Bina Nusantara University, Jakarta, Indonesia)
-        - Ida Bagus Kerthyayana Manuaba (Computer Science Department, Faculty of Computing and Media, Bina Nusantara University, Jakarta, Indonesia)
+        - *Muchsin Hisyam* (Computer Science Department, Faculty of Computing and Media, Bina Nusantara University, Jakarta, Indonesia)
+        - *Ida Bagus Kerthyayana Manuaba* (Computer Science Department, Faculty of Computing and Media, Bina Nusantara University, Jakarta, Indonesia)
           
 2. Secure Splitting of Bills and Managing Expenditure Using Blockchain, DOI : [10.1109/TEMSMET56707.2023.10149962](https://ieeexplore.ieee.org/document/10149962)
     - Published in: 2023 IEEE 3rd International Conference on Technology, Engineering, Management for Societal impact using Marketing, Entrepreneurship and Talent (TEMSMET)
@@ -34,23 +34,29 @@ Managing shared expenses among individuals and groups is a tedious and time-cons
     - Date Added to IEEE Xplore: 16 June 2023
     - Publisher: IEEE
     - Authors
-        - Swaraj Mahindre (Computer Science and Engineering G H Raisoni College of Engineering, Nagpur, India)
-        - Stuti Gupta (Computer Science and Engineering G H Raisoni College of Engineering, Nagpur, India)
-        - Vaishnavi Rambhad (Computer Science and Engineering G H Raisoni College of Engineering, Nagpur, India)
-        - Shreyasi Koppisetti (Computer Science and Engineering G H Raisoni College of Engineering, Nagpur, India)
-        - Shruti Thakur (G H Raisoni College of Engineering, Nagpur, India)
+        - *Swaraj Mahindre* (Computer Science and Engineering G H Raisoni College of Engineering, Nagpur, India)
+        - *Stuti Gupta* (Computer Science and Engineering G H Raisoni College of Engineering, Nagpur, India)
+        - *Vaishnavi Rambhad* (Computer Science and Engineering G H Raisoni College of Engineering, Nagpur, India)
+        - *Shreyasi Koppisetti* (Computer Science and Engineering G H Raisoni College of Engineering, Nagpur, India)
+        - *Shruti Thakur* (G H Raisoni College of Engineering, Nagpur, India)
 
 ## OBJECTIVES OF THE MINI PROJECT
 ### Primary Objectives:
 1. Seamless Payment Processing: Enable users to make payments securely and efficiently within the React web application using integrated payment gateways, ensuring a smooth checkout experience.
+
 2. Real-time Expense Tracking: Automatically update expense records and financial data in real-time following successful payments, providing users with accurate and up-to-date information on their spending.
+
 3. Data Accuracy and Integrity: Ensure the accuracy and integrity of financial data by integrating payment gateways with backend systems and implementing robust data validation and reconciliation mechanisms.
    
 ### Secondary Objectives:
 1. Compliance and Security: Adhere to industry standards and regulatory requirements for payment processing and data security, safeguarding sensitive financial information and mitigating risks associated with fraudulent activities.
+
 2. Scalability and Flexibility: Design the payment integration and expense tracking features to be scalable and adaptable to accommodate future growth and changes in user needs, allowing for seamless expansion and customization of functionality.
+
 3. Developer Efficiency: Streamline the development process by providing clear documentation, well-defined APIs, and reusable components for integrating payment gateways and expense tracking features within the React web application.
+
 4. Business Insights and Analytics: Leverage payment transaction data and expense tracking metrics to generate valuable insights and analytics, empowering businesses to make informed decisions and optimize their financial operations.
+
 5. Enhanced User Experience: Improve the overall user experience by simplifying the payment process, reducing friction during checkout, and offering intuitive expense tracking features within the React web application.
 
 ## PROPOSED METHODOLOGY
@@ -71,21 +77,31 @@ Managing shared expenses among individuals and groups is a tedious and time-cons
 
 ## EXPECTED OUTCOME OF THE MINI PROJECT
 - Users can make payments directly within the React web application, leading to a streamlined checkout experience with reduced friction and fewer drop-offs.
+
 - Expense records are updated automatically in real-time following successful payments, providing users with accurate and up-to-date information on their spending activities.
+
 - The React web application offers intuitive interfaces for payment processing and expense tracking, enhancing user satisfaction and engagement with the platform.
+
 - Financial data, including payment transactions and expense records, are stored securely in Firebase Firestore or Realtime Database, ensuring data accuracy and integrity.
+
 - The payment gateway integration adheres to industry standards and regulatory requirements for data security and compliance, safeguarding sensitive financial information and mitigating risks associated with fraudulent activities.
+
 - The architecture of the React web application and Firebase backend is designed to be scalable and adaptable, accommodating future growth and changes in user needs without compromising performance or reliability.
+
 - Development time and effort are reduced through the use of reusable React components, Firebase services, and well-documented integration procedures, enabling developers to focus on delivering value-added features and functionality.
 
 ## ADVANTAGES
 1. Unlike Splitwise, which primarily focuses on expense tracking and group bill splitting, our project offers integrated payment processing capabilities within the same platform. Users can make payments directly within the application, eliminating the need to switch between multiple apps or platforms for managing expenses and settling debts.
+
 2. Our project provides real-time expense tracking functionality, automatically updating expense records immediately after payments are made. This offers users instant visibility into their spending activities and ensures that expense data is always accurate and up-to-date.
+
 3. With a user interface built using HTML, CSS, JavaScript, ReactJS, and Firebase, our project offers a seamless and intuitive user experience for both expense tracking and payment processing. Users can easily navigate the application, make payments, and track expenses without encountering complex workflows or usability issues.
 
 ## DISADVANTAGES
 1. Unlike Splitwise, which specializes in expense tracking and simplifying group bill splitting, our project may prioritize payment processing over other expense management features. Users who primarily seek comprehensive expense tracking functionality without integrated payments may find our project less suitable for their needs.
+
 2. Our project relies on external payment gateway providers (e.g., Stripe, PayPal) for processing payments, which introduces a dependency on third-party services. Any disruptions or changes to these payment gateways could impact the availability and functionality of payment processing within our application.
+
 3. Handling payment transactions and sensitive financial information introduces security and compliance risks, including data breaches, fraudulent activities, and regulatory violations. Ensuring compliance with industry standards (e.g., PCI DSS) and implementing robust security measures is essential but requires ongoing vigilance and resources.
 
 ## REFERENCES
@@ -94,29 +110,29 @@ Managing shared expenses among individuals and groups is a tedious and time-cons
     - Splitwise is a popular expense tracking app that simplifies group bill splitting and expense management for users.
 
 2. Google:
-  - Website: Google
-  -Description: Google's search engine and suite of productivity tools provide valuable resources and information for research and development projects.
+    - Website: Google
+    - Description: Google's search engine and suite of productivity tools provide valuable resources and information for research and development projects.
 
 3. YouTube:
-  - Website: YouTube
-  - Description: YouTube hosts a vast array of tutorial videos and educational content on topics related to web development, including ReactJS, Firebase, and payment gateway integration.
+    - Website: YouTube
+    - Description: YouTube hosts a vast array of tutorial videos and educational content on topics related to web development, including ReactJS, Firebase, and payment gateway integration.
 
 4. IEEE Papers:
-  - Website: IEEE Xplore Digital Library
-  - Description: The IEEE Xplore Digital Library offers a comprehensive collection of scholarly articles, conference papers, and research publications on topics relevant to technology, including e-commerce, payment systems, and web development.
+    - Website: IEEE Xplore Digital Library
+    - Description: The IEEE Xplore Digital Library offers a comprehensive collection of scholarly articles, conference papers, and research publications on topics relevant to technology, including e-commerce, payment systems, and web development.
 
 5. OpenAI GPT-3 Documentation:
-  - Website: OpenAI GPT-3 Documentation
-  - Description: OpenAI's GPT-3 documentation provides information and resources on using the GPT-3 language model for natural language processing tasks, including generating content for research papers and literature reviews.
+    - Website: OpenAI GPT-3 Documentation
+    - Description: OpenAI's GPT-3 documentation provides information and resources on using the GPT-3 language model for natural language processing tasks, including generating content for research papers and literature reviews.
 
 6. ReactJS Documentation:
-  - Website: ReactJS Documentation
-  - Description: ReactJS documentation offers comprehensive guidance and tutorials for building user interfaces with React, a JavaScript library commonly used for developing web applications.
+    - Website: ReactJS Documentation
+    - Description: ReactJS documentation offers comprehensive guidance and tutorials for building user interfaces with React, a JavaScript library commonly used for developing web applications.
 
 7. Firebase Documentation:
-  - Website: Firebase Documentation
-  - Description: Firebase documentation provides detailed instructions and examples for using Firebase services, including Firestore, Realtime Database, Authentication, and Hosting, for building web and mobile applications.
+    - Website: Firebase Documentation
+    - Description: Firebase documentation provides detailed instructions and examples for using Firebase services, including Firestore, Realtime Database, Authentication, and Hosting, for building web and mobile applications.
 
 8. Payment Gateway Documentation (e.g., Stripe, PayPal):
-  - Stripe Documentation: Stripe Documentation
-  - PayPal Documentation: PayPal Developer Documentation
+    - Stripe Documentation: Stripe Documentation
+    - PayPal Documentation: PayPal Developer Documentation

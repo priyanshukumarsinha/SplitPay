@@ -18,7 +18,8 @@ export default {
         accent : "#F2F2F2",
         errorMsg : "#BA4848",
         successMsg : "#57C248",
-      }
+      },
+      
     },
   },
   plugins: [],

@@ -4,13 +4,109 @@ import { RiLockPasswordLine } from 'react-icons/ri'
 import { LuEye } from 'react-icons/lu'
 import { IoIosEye } from 'react-icons/io'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { login } from '../store/authSlice'
+import ErrorComponent from '../components/ErrorComponent'
+import SuccessComponent from '../components/SuccessComponent'
 
 const LoginPage = () => {
     const [passwordVisible, setPasswordVisible] = useState(false)
-    
+    const [error, setError] = useState('')
+    const [success, setSuccess] = useState('')
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const [widthLength, setWidthLength] = useState('100%')
+
+    const loginUser = async(e) => {
+        e.preventDefault()
+
+        // check if e.target.email.value is actually an email
+        // how to check? use regex
+        // regex for email
+        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        let email;
+        let username;
+
+        // check if email is valid
+        if(e.target.email.value && !emailRegex.test(e.target.email.value)){
+            username = e.target.email.value
+        } else {
+            email = e.target.email.value
+        }
+
+        const password = e.target.password.value
+
+        // check if email or username is provided
+        // if email is provided, login with email
+        // if username is provided, login with username
+        let data = {}
+        if(email){
+            data = {
+                email,
+                password
+            }
+        } else {
+            data = {
+                username,
+                password
+            }
+        }
+
+        // set options for login request
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }
+
+        // create request to login user
+        const response = await fetch('http://localhost:3000/api/user/login', options)
+        const responseData = await response.json()
+
+        // if error, set error state
+        if(responseData.status === 'error'){
+            setError(responseData.message)
+            setSuccess('');
+        } else {
+            // if success, store user data in local storage
+            localStorage.setItem('user', JSON.stringify(responseData.data))
+
+            // set the store with user data
+            dispatch(login(responseData.data))
+
+            // if success, set success state and set error state to empty
+
+            setTimeout(() => {
+                setSuccess(responseData.message)
+                setError('')
+
+                // no need to store token in local storage
+                // as we are using session based authentication
+                // where token is stored as cookie
+
+                // so, we can directly navigate to home page
+                // navigate to home page
+                navigate('/')
+            }, 2200)
+
+            // store user data in store
+
+
+            clearTimeout();
+
+        }
+
+    }
   return (
     <div className='flex justify-center items-center w-full bg-background'>
-        <form action="" className='w-full md:w-2/3 lg:w-1/2 roudned-xl h-screen bg-backgroundShade'>
+        <ErrorComponent error={error} widthLength = {widthLength} setError={setError} setWidthLength={setWidthLength} />
+        <SuccessComponent success= {success} widthLength = {widthLength} setSuccess = {setSuccess} setWidthLength = {setWidthLength}/>
+        <form 
+        onSubmit={(e) => loginUser(e)}
+        action="" className='w-full md:w-2/3 lg:w-1/2 roudned-xl h-screen bg-backgroundShade'>
             <div className='w-full flex flex-col justify-center h-screen p-10 px-[5%] sm:px-10 lg:px-40'>
                 <div className='flex justify-center items-center text-sm'>
                     <div className='w-14 h-[41px] border border-collapse border-gray-300 rounded-md rounded-r-none flex justify-center items-center'>
@@ -40,7 +136,9 @@ const LoginPage = () => {
                     </div>
                 </div>
                 <div className='flex justify-end items-center'>
-                    <button className='px-3 p-2 bg-primary text-white rounded-md my-2'>Login</button>
+                    <button 
+                    type='submit'
+                    className='px-3 p-2 bg-primary text-white rounded-md my-2'>Login</button>
                 </div>
 
                 <p className='w-full text-center p-5 text-gray-400 text-xs'>

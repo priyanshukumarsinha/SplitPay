@@ -14,6 +14,7 @@ import SignupPage from './pages/SignupPage.jsx';
 
 import {store} from './store/store.js'
 import { Provider, useSelector } from 'react-redux';
+import MakeaGroupPage from './pages/MakeaGroupPage.jsx';
 
 
 const router = createBrowserRouter([
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: '/signup',
     element: <SignupPage />
+  },
+  {
+    path: '/add-group',
+    element: <MakeaGroupPage />
   }
 ]);
 

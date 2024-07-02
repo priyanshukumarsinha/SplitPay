@@ -1,8 +1,12 @@
 import React from 'react'
+import Navbar from '../components/Navbar'
+import HeaderMakeaGroup from '../components/HeaderMakeaGroup'
 
 const MakeaGroupPage = () => {
   return (
-    <div>MakeaGroupPage</div>
+    <div>
+      <HeaderMakeaGroup />
+    </div>
   )
 }
 

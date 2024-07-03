@@ -56,6 +56,7 @@ const LoginPage = () => {
         // set options for login request
         const options = {
             method: 'POST',
+            credentials : 'same-origin',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -63,8 +64,12 @@ const LoginPage = () => {
         }
 
         // create request to login user
-        const response = await fetch('http://localhost:3000/api/user/login', options)
+        const response = await fetch('http://127.0.0.1:3000/api/user/login', options)
         const responseData = await response.json()
+
+        // store cookies in local storage
+        localStorage.setItem('accessToken', (responseData.data.accessToken))
+        localStorage.setItem('refreshToken', (responseData.data.refreshToken))
 
         // if error, set error state
         if(responseData.status === 'error'){

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Logo } from '../assets'
 import { FaUser } from 'react-icons/fa'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import SideBar from './SideBar'
 import { useSelector } from 'react-redux'
 
@@ -18,11 +18,13 @@ const Navbar = () => {
     }
   return (
     <nav className='flex items-center justify-between bg-backgroundShade p-4 px-10 rounded-xl relative'>
-        <div>
-            <img src={Logo} 
-            className='w-40'
-            alt="" />
-        </div>
+        <Link to='/'>
+          <div>
+              <img src={Logo} 
+              className='w-40'
+              alt="" />
+          </div>
+        </Link>
         <div 
         onClick={handleClick}
         className='bg-background p-2 rounded-full'>

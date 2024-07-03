@@ -16,14 +16,34 @@ const SideBar = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const logoutUser = () => {
+    const logoutUser = async() => {
+        // set options for login request
+        const options = {
+            method: 'POST',
+            credentials : 'same-origin',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+            },
+        }
+
+        // create request to login user
+        const response = await fetch('http://127.0.0.1:3000/api/user/logout', options)
+        const responseData = await response.json()
+
+        if(!response){
+            return new Error('Error logging out')
+        }
+
+        else{
         dispatch(logout());
 
         // update the local storage
         localStorage.clear();
+        }
 
         // redirect to login page
-        navigate('/');
+        // navigate('/');
     
     }
 

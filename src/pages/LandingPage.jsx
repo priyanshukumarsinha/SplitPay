@@ -5,7 +5,6 @@ import Home from './Home.jsx';
 
 const LandingPage = () => {
     const isAuthenticated = useSelector(state => state.auth.status);
-    console.log(isAuthenticated)
     if (isAuthenticated) {
         return <Home />
     }

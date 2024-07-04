@@ -54,12 +54,11 @@ const GroupPage = () => {
           'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
       },
     }
-    fetch(`http://127.0.0.1:3000/api/message/${id}`, options)
-      .then(response => response.json())
-      .then(data => {
-        setMessages(data.data)
-        console.log('Messages', data.data)
-      })
+    const response = await fetch(`http://127.0.0.1:3000/api/message/${id}`, options)
+    const data = await response.json();    
+
+    setMessages(data.data)
+
   }, [messages])
 
   useEffect(() => {

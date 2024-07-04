@@ -19,6 +19,7 @@ const Home = () => {
     }
 
     const [groups, setGroups] = React.useState([])
+    const [transactions, setTransactions] = React.useState([])
 
 
     React.useEffect(() => {
@@ -105,7 +106,16 @@ const Home = () => {
                       You have no previous transactions
                   </div> */}
 
-                  <div className='flex justify-between items-start gap-5 lg:gap-0 lg:justify-between lg:items-center relative flex-col lg:flex-row'>
+                  {
+                        transactions.length === 0 && (
+                            <div className='text-textDim'>
+                                You have no previous transactions
+                            </div>
+                        )
+                  }
+                  
+
+                  {/* <div className='flex justify-between items-start gap-5 lg:gap-0 lg:justify-between lg:items-center relative flex-col lg:flex-row'>
                       <div className='flex gap-5 pl-5 h-18'>
                           <img 
                           className='w-10 h-10 rounded-full'
@@ -126,7 +136,7 @@ const Home = () => {
                       </div>
 
                       <button className='ml-5 bg-successMsg text-white font-semibold py-2 px-7 rounded-lg'>Rs. 5000</button>
-                  </div>                
+                  </div>                 */}
 
               </div>
 
@@ -136,11 +146,19 @@ const Home = () => {
               </div>
 
               <div className='bg-backgroundShade w-full px-5 py-6 rounded-xl mt-3 flex flex-col gap-8'>
+                {
+                    groups.length === 0 && (
+                        <div className='text-textDim'>
+                            You have no pending transactions
+                        </div>
+                    )
+                }
 
                 {
                     groups.map((group, index) => (
                         <div 
                         key={index}
+                        onClick={() => navigate(`/group/${group.id}`)}
                         className='flex w-full flex-col lg:flex-row justify-between items-start lg:justify-between lg:items-center h-36 lg:h-20 relative'>
                             <div className='flex gap-5 pl-5 h-20 '>
                                 <div className='flex flex-col justify-between'>

@@ -18,6 +18,7 @@ import MakeaGroupPage from './pages/MakeaGroupPage.jsx';
 
 import ErrorComponent from './components/ErrorComponent.jsx';
 import SuccessComponent from './components/SuccessComponent.jsx';
+import GroupPage from './pages/GroupPage.jsx';
 
 
 const router = createBrowserRouter([
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
   {
     path: '/add-group',
     element: <MakeaGroupPage />
+  },
+  {
+    path: '/group/:id',
+    element: <GroupPage/>
   }
 ]);
 

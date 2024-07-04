@@ -8,7 +8,8 @@ import { useSelector } from 'react-redux'
 const Navbar = () => {
     const navigate = useNavigate();
     const [showMenu, setShowMenu] = useState(false);
-    const isAuthenticated = useSelector(state => state.auth.status);
+    const isAuthenticated = useSelector(state => state.auth?.status);
+    const user = useSelector(state => state.auth?.user?.user)
     const handleClick = () => {
         if(!isAuthenticated) {
             navigate('/login')
@@ -28,8 +29,15 @@ const Navbar = () => {
         <div 
         onClick={handleClick}
         className='bg-background p-2 rounded-full'>
-            <FaUser 
-            className='text-white text-xl'/>
+            {
+              isAuthenticated ? 
+              (<img 
+              className='w-10 h-10 rounded-full'
+              src={isAuthenticated && user.photoURL}
+              alt="" />)
+              :
+              <FaUser className='text-white text-2xl' /> 
+            }
         </div>
         {showMenu && <SideBar />}
     </nav>

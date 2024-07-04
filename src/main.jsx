@@ -16,6 +16,9 @@ import {store} from './store/store.js'
 import { Provider, useSelector } from 'react-redux';
 import MakeaGroupPage from './pages/MakeaGroupPage.jsx';
 
+import ErrorComponent from './components/ErrorComponent.jsx';
+import SuccessComponent from './components/SuccessComponent.jsx';
+
 
 const router = createBrowserRouter([
   {
@@ -39,7 +42,8 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <RouterProvider router={router} >
+      </RouterProvider>
     </Provider>
   </React.StrictMode>,
 )

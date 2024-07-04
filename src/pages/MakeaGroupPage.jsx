@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import HeaderMakeaGroup from '../components/HeaderMakeaGroup'
-import { useSelector } from 'react-redux'
-
+import { useDispatch, useSelector } from 'react-redux'
+import FriendsComponent from '../components/FriendsComponent'
+import ErrorComponent from '../components/ErrorComponent.jsx';
+import SuccessComponent from '../components/SuccessComponent.jsx';
+import { useNavigate } from 'react-router-dom';
 
 const MakeaGroupPage = () => {
   const user = useSelector(state => state.auth?.user?.user)
   const [groupName, setGroupName] = useState('');
   const [groupDescription, setGroupDescription] = useState('');
-  const adminId = user.id;
   const [amount, setAmount] = useState(0);
   const [currency, setCurrency] = useState('INR');
   const [groupType, setGroupType] = useState('Public'); // ['Public', 'Private']
@@ -15,6 +17,14 @@ const MakeaGroupPage = () => {
   // the members array contains id of the users who are part of the group
   const [members, setMembers] = useState([]);
   const [friends, setFriends] = useState([]);
+
+  const navigate = useNavigate();
+
+  const isAuthenticated = useSelector(state => state.auth.status);
+  isAuthenticated ? null : navigate('/')
+
+
+  const dispatch = useDispatch();
 
   // members can be added from the friends list
 
@@ -33,7 +43,6 @@ const MakeaGroupPage = () => {
         setFriends(data.data)
       } 
       )
-      console.log(friends)
   }, [])
 
   const addToGroup = (friend) => {
@@ -106,6 +115,8 @@ const MakeaGroupPage = () => {
   return (
     <div>
       <HeaderMakeaGroup />
+      <ErrorComponent/>
+      <SuccessComponent/>
       <main className='bg-background w-full p-10 px-[5%] md:px-[7%] lg:px-[10%]'>
           <div className='flex gap-10 justify-between'>
             <div className=' w-full lg:w-[65%]'>
@@ -173,7 +184,7 @@ const MakeaGroupPage = () => {
                           <div className='flex gap-5 pl-5 h-18'>
                               <img 
                               className='w-10 h-10 rounded-full'
-                              src="https://tse4.mm.bing.net/th?id=OIP.vSuRGgrtiIEx228wtcp_dgHaHa&pid=Api&P=0&h=180" 
+                              src={user.photoURL} 
                               alt="" />
 
                               <div className='h-10 flex flex-col justify-between'>
@@ -198,7 +209,7 @@ const MakeaGroupPage = () => {
                           <div className='flex gap-5 pl-5 h-18'>
                               <img 
                               className='w-10 h-10 rounded-full'
-                              src="https://tse4.mm.bing.net/th?id=OIP.vSuRGgrtiIEx228wtcp_dgHaHa&pid=Api&P=0&h=180" 
+                              src={member.photoURL} 
                               alt="" />
 
                               <div className='h-10 flex flex-col justify-between'>
@@ -231,43 +242,8 @@ const MakeaGroupPage = () => {
 
             </div>
 
-            <div className='w-[30%] bg-backgroundShade p-5 rounded-lg sticky top-10 h-[500px] hidden lg:flex lg:flex-col'>
-              <div className='relative'>
-                      <h2 className='text-base p-5 text-white'>Friends</h2>
-                      <div className='w-[50px] bg-primary p-[1px] absolute bottom-3 left-5'></div>
-              </div>
-              <div className='flex flex-col gap-8'>
-                
+            <FriendsComponent friends={friends} addToGroup={addToGroup} />
 
-                {
-                  friends && 
-                  (
-                    friends.map((friend, index) => 
-                      (
-                      <div key= {index}className='flex justify-between items-center relative'>
-                        <div className='flex gap-5 pl-5'>
-                            <img 
-                            className='w-10 h-10 rounded-full'
-                            src={friend.following.photoURL} 
-                            alt="" />
-
-                            <div className='h-10 flex flex-col justify-between'>
-                                <div 
-                                  onClick={() => addToGroup(friend.following)}
-                                className='flex justify-start items-center gap-2'>
-                                    <h3 className='text-white font-bold text-[14px]'>{friend.following.username}</h3>
-                                </div>
-                                <p className='text-yellow-400 text-[10px]'>{friend.following.phoneNumber}</p>
-                            </div>
-                        </div>
-                    </div>
-                    ))
-                  )
-                }
-
-                    
-              </div>
-          </div>
           </div>
       </main>
     </div>

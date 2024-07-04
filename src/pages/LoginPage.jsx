@@ -5,18 +5,17 @@ import { LuEye } from 'react-icons/lu'
 import { IoIosEye } from 'react-icons/io'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../store/authSlice'
 import ErrorComponent from '../components/ErrorComponent'
 import SuccessComponent from '../components/SuccessComponent'
+import { setError, setSuccess } from '../store/authSlice'
+
 
 const LoginPage = () => {
     const [passwordVisible, setPasswordVisible] = useState(false)
-    const [error, setError] = useState('')
-    const [success, setSuccess] = useState('')
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const [widthLength, setWidthLength] = useState('100%')
 
     const loginUser = async(e) => {
         e.preventDefault()
@@ -66,27 +65,32 @@ const LoginPage = () => {
         // create request to login user
         const response = await fetch('http://127.0.0.1:3000/api/user/login', options)
         const responseData = await response.json()
-
-        // store cookies in local storage
-        localStorage.setItem('accessToken', (responseData.data.accessToken))
-        localStorage.setItem('refreshToken', (responseData.data.refreshToken))
+        console.log(responseData.status)
 
         // if error, set error state
-        if(responseData.status === 'error'){
-            setError(responseData.message)
-            setSuccess('');
+        if(responseData.status == 'error'){
+
+            dispatch(setError(responseData.message))
+            dispatch(setSuccess(''))
         } else {
+
+            // store cookies in local storage
+            localStorage.setItem('accessToken', (responseData.data.accessToken))
+            localStorage.setItem('refreshToken', (responseData.data.refreshToken))
+
             // if success, store user data in local storage
             localStorage.setItem('user', JSON.stringify(responseData.data))
 
             // set the store with user data
-            dispatch(login(responseData.data))
-
+            
             // if success, set success state and set error state to empty
-
+            
+            dispatch(setSuccess(responseData.message))
+            dispatch(login(responseData.data))
+            
             setTimeout(() => {
-                setSuccess(responseData.message)
-                setError('')
+                dispatch(setError(''))
+                dispatch(setSuccess(''))
 
                 // no need to store token in local storage
                 // as we are using session based authentication
@@ -107,8 +111,8 @@ const LoginPage = () => {
     }
   return (
     <div className='flex justify-center items-center w-full bg-background'>
-        <ErrorComponent error={error} widthLength = {widthLength} setError={setError} setWidthLength={setWidthLength} />
-        <SuccessComponent success= {success} widthLength = {widthLength} setSuccess = {setSuccess} setWidthLength = {setWidthLength}/>
+        <ErrorComponent/>
+        <SuccessComponent/>
         <form 
         onSubmit={(e) => loginUser(e)}
         action="" className='w-full md:w-2/3 lg:w-1/2 roudned-xl h-screen bg-backgroundShade'>

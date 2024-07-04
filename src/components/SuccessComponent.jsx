@@ -29,7 +29,7 @@ const SuccessComponent = () => {
     }, [widthLength]);
 
   return (
-    <div className= {`rounded-lg bg-successMsg absolute top-0 right-0 flex flex-col items-end  ${success===''? 'hidden' :''}`}>
+    <div className= {`rounded-lg bg-successMsg fixed top-0 right-0 flex flex-col items-end  ${success===''? 'hidden' :''}`}>
         <div className='p-5 flex justify-end items-center gap-10 px-10 transition-all ease-out'>
             <MdErrorOutline />
             Success : {success}

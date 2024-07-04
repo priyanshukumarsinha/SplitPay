@@ -5,6 +5,8 @@ import FriendsComponent from '../components/FriendsComponent'
 import ErrorComponent from '../components/ErrorComponent.jsx';
 import SuccessComponent from '../components/SuccessComponent.jsx';
 import { useNavigate } from 'react-router-dom';
+import { setError, setSuccess } from '../store/authSlice.js';
+
 
 const MakeaGroupPage = () => {
   const user = useSelector(state => state.auth?.user?.user)
@@ -82,7 +84,11 @@ const MakeaGroupPage = () => {
     const response = await fetch('http://127.0.0.1:3000/api/group/create', options);
     const responseData = await response.json();
 
-    console.log(responseData);
+    if(responseData.status == 'error'){
+      dispatch(setError(responseData.message));
+      return;
+    }
+
     members.forEach(member => {
       addMembers(responseData.data.id, member.id)
     })
@@ -135,7 +141,7 @@ const MakeaGroupPage = () => {
                       <option value="Public">Public</option>
                       <option value="Private">Private</option>
                     </select>
-                  </div>
+                </div>
 
                 <div className='lg:flex gap-5 items-center'>
                   <textarea name="" id=""

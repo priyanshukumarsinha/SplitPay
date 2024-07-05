@@ -65,6 +65,24 @@ const GroupPage = () => {
     getMessages()
   }, [])
 
+  // setInterval(() => {
+  //   // not efficient and scalable method
+  //   // try using websockets
+  //   // but for now, this will do
+  //   getMessages()
+  // }, 10000)
+
+  // clearInterval();
+
+  useEffect(() => {
+    try{
+      const messageBody = document.getElementById('messages')
+      messageBody.scrollTop = messageBody.scrollHeight - messageBody.clientHeight;
+      console.log(scrollTop)
+    }
+    catch{}
+  }, [messages])
+
   // console.log('Messages', messages)
 
   useEffect(() => {
@@ -241,6 +259,7 @@ const GroupPage = () => {
     const responseData = await response.json();
 
     console.log(responseData);
+    setMessage('')
 
     getMessages();
   }
@@ -399,7 +418,7 @@ const GroupPage = () => {
               </div>
 
               <div className='bg-backgroundShade w-inherit p-10 rounded-xl my-10 flex flex-col gap-8'>
-                <div className=''>
+                <div className='overflow-y-scroll h-[500px] no-scrollbar' id="messages">
                   {
                     messages && 
                     (messages.map((message, index) => (
@@ -419,6 +438,7 @@ const GroupPage = () => {
                 </div>
                 <div className='relative'>
                   <textarea 
+                  value={message}
                   onChange={(e) => setMessage(e.target.value)}
                    className='pr-20 text-white rounded-lg bg-background/50 p-5 py-3 border-0 outline-none w-full h-20 overflow-y-hidden' placeholder='Message...'
                   name="" id=""></textarea>
@@ -430,7 +450,7 @@ const GroupPage = () => {
                     ) :(
                       <div className='absolute bottom-0 right-3 h-full flex justify-center items-center'>
                         <button 
-                        onClick={() => createMessage()}
+                        onClick={() => {createMessage()}}
                         className='p-4 bg-primary font-semibold text-white px-5 rounded-lg'>
                           <IoIosSend className='bg-primary text-xl text-white'/>
                         </button>

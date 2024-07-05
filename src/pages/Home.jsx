@@ -107,6 +107,7 @@ const Home = () => {
                   </div> */}
 
                   {
+                        transactions &&
                         transactions.length === 0 && (
                             <div className='text-textDim'>
                                 You have no previous transactions
@@ -147,6 +148,7 @@ const Home = () => {
 
               <div className='bg-backgroundShade w-full px-5 py-6 rounded-xl mt-3 flex flex-col gap-8'>
                 {
+                    groups &&
                     groups.length === 0 && (
                         <div className='text-textDim'>
                             You have no pending transactions
@@ -155,6 +157,7 @@ const Home = () => {
                 }
 
                 {
+                    groups &&
                     groups.map((group, index) => (
                         <div 
                         key={index}

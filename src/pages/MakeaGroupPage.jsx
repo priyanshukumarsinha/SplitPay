@@ -16,6 +16,8 @@ const MakeaGroupPage = () => {
   const [currency, setCurrency] = useState('INR');
   const [groupType, setGroupType] = useState('Public'); // ['Public', 'Private']
 
+  const[ share, setShare] = useState(0)
+
   // the members array contains id of the users who are part of the group
   const [members, setMembers] = useState([]);
   const [friends, setFriends] = useState([]);
@@ -92,6 +94,9 @@ const MakeaGroupPage = () => {
     members.forEach(member => {
       addMembers(responseData.data.id, member.id)
     })
+
+    dispatch(setSuccess('Group created successfully'));
+    navigate(`/group/${responseData.data.id}`)
   }
 
   const addMembers = async(groupId, memberId) => {
@@ -165,7 +170,7 @@ const MakeaGroupPage = () => {
 
                   <div className='lg:flex gap-5 items-center'>
                     <input
-                    onChange={(e) => setAmount(e.target.value)}
+                    onChange={(e) => {setAmount(e.target.value)}}
                     type="text" className='text-sm p-5 py-3 text-white bg-inherit border-0 outline-none'
                     placeholder='Total Amount'
                     />
@@ -197,7 +202,7 @@ const MakeaGroupPage = () => {
                                   <div className='flex justify-start items-center gap-2 '>
                                       <h3 className='text-white font-bold text-[14px]'>{user.username}</h3>
                                   </div>
-                                  <p className='text-yellow-400 text-[10px]'>share</p>
+                                  <p className='text-yellow-400 text-[10px]'>{`${100/(members.length+1)}%`}</p>
                               </div>
                           </div>
 
@@ -205,7 +210,7 @@ const MakeaGroupPage = () => {
 
                           </div>
 
-                          <button className='ml-5 bg-yellow-600 text-white font-semibold py-2 px-7 rounded-lg'>Rs. 0</button>
+                          <button className='ml-5 bg-yellow-600 text-white font-semibold py-2 px-7 rounded-lg'>Rs. {amount/(members.length+1)}</button>
                         </div>
 
                     {
@@ -223,7 +228,7 @@ const MakeaGroupPage = () => {
                                   className='flex justify-start items-center gap-2 '>
                                       <h3 className='text-white font-bold text-[14px]'>{member.username}</h3>
                                   </div>
-                                  <p className='text-yellow-400 text-[10px]'>share</p>
+                                  <p className='text-yellow-400 text-[10px]'>{`${100/(members.length+1)}%`}</p>
                               </div>
                           </div>
 
@@ -231,7 +236,7 @@ const MakeaGroupPage = () => {
 
                           </div>
 
-                          <button className='ml-5 bg-yellow-600 text-white font-semibold py-2 px-7 rounded-lg'>Rs. 0</button>
+                          <button className='ml-5 bg-yellow-600 text-white font-semibold py-2 px-7 rounded-lg'>Rs. {amount/(members.length+1)}</button>
                         </div>
                       )))
                     }

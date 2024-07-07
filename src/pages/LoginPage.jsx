@@ -10,6 +10,7 @@ import { login } from '../store/authSlice'
 import ErrorComponent from '../components/ErrorComponent'
 import SuccessComponent from '../components/SuccessComponent'
 import { setError, setSuccess } from '../store/authSlice'
+import { SERVER_URI } from '../constants.js'
 
 
 const LoginPage = () => {
@@ -63,7 +64,7 @@ const LoginPage = () => {
         }
 
         // create request to login user
-        const response = await fetch('http://127.0.0.1:3000/api/user/login', options)
+        const response = await fetch(`${SERVER_URI}/api/user/login`, options)
         const responseData = await response.json()
         console.log(responseData.status)
 

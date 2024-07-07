@@ -6,6 +6,7 @@ import ErrorComponent from '../components/ErrorComponent.jsx';
 import SuccessComponent from '../components/SuccessComponent.jsx';
 import { useNavigate } from 'react-router-dom';
 import { setError, setSuccess } from '../store/authSlice.js';
+import { SERVER_URI } from '../constants.js';
 
 
 const MakeaGroupPage = () => {
@@ -29,25 +30,6 @@ const MakeaGroupPage = () => {
 
 
   const dispatch = useDispatch();
-
-  // members can be added from the friends list
-
-  useEffect(() => {
-    const options = {
-      method: 'GET',
-      credentials : 'same-origin',
-      headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
-      },
-    }
-    fetch('http://127.0.0.1:3000/api/user/following', options)
-      .then(response => response.json())
-      .then(data => {
-        setFriends(data.data)
-      } 
-      )
-  }, [])
 
   const addToGroup = (friend) => {
     // first check if the friend is already in the group
@@ -83,7 +65,7 @@ const MakeaGroupPage = () => {
       body: JSON.stringify(data)
     }
 
-    const response = await fetch('http://127.0.0.1:3000/api/group/create', options);
+    const response = await fetch(`${SERVER_URI}/api/group/create`, options);
     const responseData = await response.json();
 
     if(responseData.status == 'error'){
@@ -115,7 +97,7 @@ const MakeaGroupPage = () => {
       body: JSON.stringify(data)
     }
 
-    const response = await fetch('http://127.0.0.1:3000/api/group/add' , options);
+    const response = await fetch(`${SERVER_URI}/api/group/add` , options);
     const responseData = await response.json();
 
     console.log(responseData);

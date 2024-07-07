@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
+import { SERVER_URI } from '../constants'
 
 const FriendsComponent = ({addToGroup}) => {
   const [search, setSearch] = React.useState('')
@@ -16,7 +17,7 @@ const FriendsComponent = ({addToGroup}) => {
           'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
       },
     }
-    fetch('http://127.0.0.1:3000/api/user/following', options)
+    fetch(`${SERVER_URI}/api/user/following`, options)
       .then(response => response.json())
       .then(data => {
         setFriends(data.data)
@@ -24,7 +25,7 @@ const FriendsComponent = ({addToGroup}) => {
       )
   }, [])
 
-  const startSearch = async(value) => {
+  const startSearch = useCallback(async(value) => {
     // set search value
     setSearch(value)
 
@@ -32,18 +33,18 @@ const FriendsComponent = ({addToGroup}) => {
     if(value === '') return showSearch(false)
 
     // get data from the server
-    const response = await fetch(`http://localhost:3000/api/user/user/${value}`)
+    const response = await fetch(`${SERVER_URI}/api/user/user/${value}`)
     const data = await response.json()
 
     // set the searched user
     setSearchedUser(data)
 
-  }
+  })
 
 
   const follow = async(user) => {
     // get the user from the server
-    const response = await fetch(`http://localhost:3000/api/follow/${user?.username}`, {
+    const response = await fetch(`${SERVER_URI}/api/follow/${user?.username}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -53,13 +54,16 @@ const FriendsComponent = ({addToGroup}) => {
     const data = await response.json()
 
     // update the friends list
+    if(friends)
     setFriends([...friends, {following : data.data.following}])
+    else
+    setFriends([{following : data.data.following}])
 
   }
 
   const unfollow = async(user) => {
     // get the user from the server
-    const response = await fetch(`http://localhost:3000/api/unfollow/${user.username}`, {
+    const response = await fetch(`${SERVER_URI}/api/unfollow/${user.username}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

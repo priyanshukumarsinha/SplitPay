@@ -11,6 +11,8 @@ import _, { create } from 'lodash';
 import { stringify } from 'postcss';
 import { IoIosSend } from 'react-icons/io';
 
+import { SERVER_URI } from '../constants.js';
+
 
 const GroupPage = () => {
 
@@ -54,7 +56,7 @@ const GroupPage = () => {
           'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
       },
     }
-    const response = await fetch(`http://127.0.0.1:3000/api/message/${id}`, options)
+    const response = await fetch(`${SERVER_URI}/api/message/${id}`, options)
     const data = await response.json();    
 
     setMessages(data.data)
@@ -94,7 +96,7 @@ const GroupPage = () => {
           'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
       },
     }
-    fetch(`http://127.0.0.1:3000/api/group/${id}`, options)
+    fetch(`${SERVER_URI}/api/group/${id}`, options)
       .then(response => response.json())
       .then(data => {
         setGroup(data.data)
@@ -117,7 +119,7 @@ const GroupPage = () => {
           'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
       },
     }
-    fetch('http://127.0.0.1:3000/api/user/following', options)
+    fetch(`${SERVER_URI}/api/user/following`, options)
       .then(response => response.json())
       .then(data => {
         setFriends(data.data)
@@ -160,7 +162,7 @@ const GroupPage = () => {
       body: JSON.stringify(data)
     }
 
-    const response = await fetch('http://127.0.0.1:3000/api/group/update', options);
+    const response = await fetch(`${SERVER_URI}/api/group/update`, options);
     const responseData = await response.json();
 
     if(responseData.status == 'error'){
@@ -210,7 +212,7 @@ const GroupPage = () => {
       body: JSON.stringify(data)
     }
 
-    const response = await fetch('http://127.0.0.1:3000/api/group/add' , options);
+    const response = await fetch(`${SERVER_URI}/api/group/add` , options);
     const responseData = await response.json();
 
     console.log(responseData);
@@ -233,7 +235,7 @@ const GroupPage = () => {
       body: JSON.stringify(data)
     }
 
-    const response = await fetch('http://127.0.0.1:3000/api/group/remove' , options);
+    const response = await fetch(`${SERVER_URI}/api/group/remove` , options);
     const responseData = await response.json();
 
     console.log(responseData);
@@ -255,7 +257,7 @@ const GroupPage = () => {
       body: JSON.stringify(data)
     }
 
-    const response = await fetch('http://127.0.0.1:3000/api/message/create' , options);
+    const response = await fetch(`${SERVER_URI}/api/message/create` , options);
     const responseData = await response.json();
 
     console.log(responseData);

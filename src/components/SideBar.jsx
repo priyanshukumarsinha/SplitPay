@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { logout } from '../store/authSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { SERVER_URI } from '../constants';
 
 const SideBar = () => {
     const user = useSelector(state => state.auth?.user?.user)
@@ -28,7 +29,7 @@ const SideBar = () => {
         }
 
         // create request to login user
-        const response = await fetch('http://127.0.0.1:3000/api/user/logout', options)
+        const response = await fetch(`${SERVER_URI}/api/user/logout`, options)
         const responseData = await response.json()
 
         if(!response){

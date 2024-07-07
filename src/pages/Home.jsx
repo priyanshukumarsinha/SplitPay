@@ -5,6 +5,7 @@ import HeaderHomePage from '../components/HeaderHomePage';
 import FriendsComponent from '../components/FriendsComponent';
 import ErrorComponent from '../components/ErrorComponent';
 import SuccessComponent from '../components/SuccessComponent';
+import { SERVER_URI } from '../constants';
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -35,7 +36,7 @@ const Home = () => {
               'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
           },
         }
-        fetch('http://127.0.0.1:3000/api/user/following', options)
+        fetch(`${SERVER_URI}/api/user/following`, options)
           .then(response => response.json())
           .then(data => {
             setFriends(data.data)
@@ -54,7 +55,7 @@ const Home = () => {
                 },
             }
 
-            const response = await fetch('http://127.0.0.1:3000/api/user/groups' , options);
+            const response = await fetch(`${SERVER_URI}/api/user/groups` , options);
             const responseData = await response.json();
 
             if(response){

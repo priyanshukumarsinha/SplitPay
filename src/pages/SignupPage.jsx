@@ -9,7 +9,7 @@ import SuccessComponent from '../components/SuccessComponent'
 import { useDispatch } from 'react-redux'
 import { login } from '../store/authSlice.js'
 import { setError, setSuccess } from '../store/authSlice.js'
-import { SERVER_URI } from '../config.js'
+import { SERVER_URI } from '../constants.js'
 
 const SignupPage = () => {
     const [passwordVisible, setPasswordVisible] = useState(false)

@@ -9,6 +9,7 @@ import SuccessComponent from '../components/SuccessComponent'
 import { useDispatch } from 'react-redux'
 import { login } from '../store/authSlice.js'
 import { setError, setSuccess } from '../store/authSlice.js'
+import { SERVER_URI } from '../config.js'
 
 const SignupPage = () => {
     const [passwordVisible, setPasswordVisible] = useState(false)
@@ -37,7 +38,7 @@ const SignupPage = () => {
 
 
         // create request to create user
-        const response = await fetch('http://localhost:3000/api/user/create', options)
+        const response = await fetch(`${SERVER_URI}/api/user/create`, options)
         
         const responseData = await response.json()
 
@@ -84,7 +85,7 @@ const SignupPage = () => {
         }
 
         // create request to login user
-        const response = await fetch('http://localhost:3000/api/user/login', options)
+        const response = await fetch(`${SERVER_URI}/api/user/login`, options)
         const responseData = await response.json()
 
         // if error, set error state

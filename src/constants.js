@@ -1,1 +1,1 @@
-export const SERVER_URI = "https://s3-lovat.vercel.app"
+export const SERVER_URI = "https://split-pay-backend.vercel.app"

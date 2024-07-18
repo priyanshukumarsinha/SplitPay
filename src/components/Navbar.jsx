@@ -33,7 +33,7 @@ const Navbar = () => {
               isAuthenticated ? 
               (<img 
               className='w-10 h-10 rounded-full'
-              src={isAuthenticated && user.photoURL}
+              src={isAuthenticated && user?.photoURL}
               alt="" />)
               :
               <FaUser className='text-white text-2xl' /> 

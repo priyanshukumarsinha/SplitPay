@@ -6,6 +6,7 @@ import FriendsComponent from '../components/FriendsComponent';
 import ErrorComponent from '../components/ErrorComponent';
 import SuccessComponent from '../components/SuccessComponent';
 import { SERVER_URI } from '../constants';
+import FriendsComponentMobile from '../components/FriendsComponentMobile';
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -225,6 +226,8 @@ const Home = () => {
           </div>
           
                 <FriendsComponent friends={friends} />
+                <FriendsComponentMobile friends={friends}/>
+
 
           </div>
           </main>

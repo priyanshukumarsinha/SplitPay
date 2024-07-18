@@ -12,6 +12,7 @@ import { stringify } from 'postcss';
 import { IoIosSend } from 'react-icons/io';
 
 import { SERVER_URI } from '../constants.js';
+import FriendsComponentMobile from '../components/FriendsComponentMobile.jsx';
 
 
 const GroupPage = () => {
@@ -466,6 +467,7 @@ const GroupPage = () => {
             </div>
 
             <FriendsComponent friends={friends} addToGroup={addToGroup} />
+            <FriendsComponentMobile friends={friends} addToGroup={addToGroup} />
 
           </div>
       </main>

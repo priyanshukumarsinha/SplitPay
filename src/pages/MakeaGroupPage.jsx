@@ -7,6 +7,7 @@ import SuccessComponent from '../components/SuccessComponent.jsx';
 import { useNavigate } from 'react-router-dom';
 import { setError, setSuccess } from '../store/authSlice.js';
 import { SERVER_URI } from '../constants.js';
+import FriendsComponentMobile from '../components/FriendsComponentMobile';
 
 
 const MakeaGroupPage = () => {
@@ -236,6 +237,8 @@ const MakeaGroupPage = () => {
             </div>
 
             <FriendsComponent friends={friends} addToGroup={addToGroup} />
+            <FriendsComponentMobile friends={friends} addToGroup={addToGroup} />
+
 
           </div>
       </main>

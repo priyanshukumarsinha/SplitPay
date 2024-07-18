@@ -1,94 +1,93 @@
 import React, { useCallback, useEffect } from 'react'
 import { SERVER_URI } from '../constants'
 
-const FriendsComponent = ({addToGroup}) => {
-  const [search, setSearch] = React.useState('')
-  const [searchedUser, setSearchedUser] = React.useState([])
-  const [showSearch, setShowSearch] = React.useState(false)
-  const [following, setFollowing] = React.useState(false)
-  const [friends, setFriends] = React.useState([])
-
-  React.useEffect(() => {
-    const options = {
-      method: 'GET',
-      credentials : 'same-origin',
-      headers: {
+const FriendsComponentMobile = ({addToGroup}) => {
+    const [search, setSearch] = React.useState('')
+    const [searchedUser, setSearchedUser] = React.useState([])
+    const [showSearch, setShowSearch] = React.useState(false)
+    const [following, setFollowing] = React.useState(false)
+    const [friends, setFriends] = React.useState([])
+  
+    React.useEffect(() => {
+      const options = {
+        method: 'GET',
+        credentials : 'same-origin',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+        },
+      }
+      fetch(`${SERVER_URI}/api/user/following`, options)
+        .then(response => response.json())
+        .then(data => {
+          setFriends(data.data)
+        } 
+        )
+    }, [])
+  
+    const startSearch = useCallback(async(value) => {
+      // set search value
+      setSearch(value)
+  
+      // if search value is empty, return
+      if(value === '') return showSearch(false)
+  
+      // get data from the server
+      const response = await fetch(`${SERVER_URI}/api/user/user/${value}`)
+      const data = await response.json()
+  
+      // set the searched user
+      setSearchedUser(data)
+  
+    })
+  
+  
+    const follow = async(user) => {
+      // get the user from the server
+      const response = await fetch(`${SERVER_URI}/api/follow/${user?.username}`, {
+        method: 'GET',
+        headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
-      },
+        },
+      })
+      const data = await response.json()
+  
+      // update the friends list
+      if(friends)
+      setFriends([...friends, {following : data.data.following}])
+      else
+      setFriends([{following : data.data.following}])
+  
     }
-    fetch(`${SERVER_URI}/api/user/following`, options)
-      .then(response => response.json())
-      .then(data => {
-        setFriends(data.data)
-      } 
-      )
-  }, [])
-
-  const startSearch = useCallback(async(value) => {
-    // set search value
-    setSearch(value)
-
-    // if search value is empty, return
-    if(value === '') return showSearch(false)
-
-    // get data from the server
-    const response = await fetch(`${SERVER_URI}/api/user/user/${value}`)
-    const data = await response.json()
-
-    // set the searched user
-    setSearchedUser(data)
-
-  })
-
-
-  const follow = async(user) => {
-    // get the user from the server
-    const response = await fetch(`${SERVER_URI}/api/follow/${user?.username}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
-      },
-    })
-    const data = await response.json()
-
-    // update the friends list
-    if(friends)
-    setFriends([...friends, {following : data.data.following}])
-    else
-    setFriends([{following : data.data.following}])
-
-  }
-
-  const unfollow = async(user) => {
-    // get the user from the server
-    const response = await fetch(`${SERVER_URI}/api/unfollow/${user.username}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
-      },
-    })
-    const data = await response.json()
-
-    // update the friends list
-    setFriends(friends.filter(friend => friend.following?.username !== user?.username))
-  }
-
-  useEffect(() => {
-  }, [searchedUser])
-
+  
+    const unfollow = async(user) => {
+      // get the user from the server
+      const response = await fetch(`${SERVER_URI}/api/unfollow/${user.username}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+        },
+      })
+      const data = await response.json()
+  
+      // update the friends list
+      setFriends(friends.filter(friend => friend.following?.username !== user?.username))
+    }
+  
+    useEffect(() => {
+    }, [searchedUser])
   return (
-    <div className='w-[30%] bg-backgroundShade p-5 rounded-lg lg:sticky top-10 h-[500px] hidden lg:flex lg:flex-col'>
+    <div className='w-[90%] bg-[#1f1e1e] p-5 rounded-lg lg:hidden bottom-10 fixed z-50'>
     <div className='relative flex justify-between items-center'>
-            <h2 className='text-base p-5 text-white'>Friends</h2>
+            {/* <h2 className='text-base p-5 text-white'>Friends</h2> */}
             <div className='w-1/2 text-xs'>
                 <input 
                 onChange={(e) => startSearch(e.target.value)}
-                type="text" placeholder='Search Friends' className='bg-gray-200 px-5 py-3 outline-none rounded-lg w-40 text-background' />
+                type="text" placeholder='Search Friends' className='bg-gray-200 px-5 py-3 outline-none rounded-lg w-full mb-5 text-background' />
             </div>
-            <div className='w-[50px] bg-primary p-[1px] absolute bottom-3 left-5'></div>
+            {/* <div className='w-[50px] bg-primary p-[1px] absolute bottom-3 left-5'></div> */}
     </div>
     {
       search && (
@@ -175,4 +174,4 @@ const FriendsComponent = ({addToGroup}) => {
   )
 }
 
-export default FriendsComponent
+export default FriendsComponentMobile

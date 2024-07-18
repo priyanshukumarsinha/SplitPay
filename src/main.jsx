@@ -8,7 +8,6 @@ import {
 } from "react-router-dom";
 
 import LandingPage from './pages/LandingPage.jsx';
-import Home from './pages/Home.jsx';
 import LoginPage from './pages/LoginPage.jsx';
 import SignupPage from './pages/SignupPage.jsx';
 
@@ -16,8 +15,6 @@ import {store} from './store/store.js'
 import { Provider, useSelector } from 'react-redux';
 import MakeaGroupPage from './pages/MakeaGroupPage.jsx';
 
-import ErrorComponent from './components/ErrorComponent.jsx';
-import SuccessComponent from './components/SuccessComponent.jsx';
 import GroupPage from './pages/GroupPage.jsx';
 
 
